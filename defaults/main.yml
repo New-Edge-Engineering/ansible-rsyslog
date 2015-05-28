@@ -1,0 +1,3 @@
+---
+rsyslog_sender_services: {}  # a dictionary of services with lists of logfiles and associate tag
+# rsyslog_sender_logstash_host: localhost

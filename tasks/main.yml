@@ -1,0 +1,26 @@
+---
+# install rsyslog
+- name: RSysLog | Ensure software is installed
+  yum:
+    name: rsyslog
+    state: present
+  sudo: yes
+
+# create configuration files
+- name: RSysLog | Ensure configuration files exist for all service logs to be sent
+  template:
+    src: service.conf.j2
+    dest: /etc/rsyslog.d/{{ item }}.conf
+  with_items: rsyslog_sender_services.keys()
+  sudo: yes
+  notify:
+    - restart rsyslog
+
+- name: RSysLog | Ensure configuration files exist for logstash server
+  template:
+    src: logstash.conf.j2
+    dest: /etc/rsyslog.d/logstash.conf
+  sudo: yes
+  when: rsyslog_sender_logstash_host is defined
+  notify:
+    - restart rsyslog
