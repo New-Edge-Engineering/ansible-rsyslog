@@ -8,8 +8,8 @@ $ModLoad imuxsock # for reading local syslog messages
 
 {% for service in rsyslog_sender_services[item] %}
 # Watch {{ service.file }}
-$InputFileName {{ service.file }} #can NOT use wildcards
-$InputFileTag {{ service.tag }}: #Logstash “Program”
+$InputFileName {{ service.file }} # can NOT use wildcards
+$InputFileTag {{ service.tag }}: # Logstash Program
 $InputFileStateFile state-{{ service.tag }}-{{ loop.index0 }} #can be anything; unique id used by rsyslog
 $InputRunFileMonitor
 
