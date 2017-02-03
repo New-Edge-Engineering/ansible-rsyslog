@@ -17,7 +17,7 @@
   template:
     src: service.conf.j2
     dest: /etc/rsyslog.d/{{ item }}.conf
-  with_items: rsyslog_sender_services.keys()
+  with_items: "{{rsyslog_sender_services.keys()}}"
   notify:
     - restart rsyslog
 
